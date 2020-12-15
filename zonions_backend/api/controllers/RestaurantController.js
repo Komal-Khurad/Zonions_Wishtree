@@ -1,0 +1,122 @@
+/**
+ * RestaurantController
+ *
+ * @description :: Server-side actions for handling incoming requests.
+ * @help        :: See https://sailsjs.com/docs/concepts/actions
+ */
+module.exports = {
+  /**
+   * `RestaurantController.create()`
+   */
+  create: async function (req, res) {
+    try{
+      let param = req.allParams();
+      console.log(param);
+
+      const restaurant = await Restaurant.create({
+        restaurantName:param.restaurantName,
+        address: param.address,
+        phone: param.phone,
+        openingTime: param.openingTime,
+        closingTime: param.closingTime,
+        imgUrl: param.imgUrl,
+        imgAlt: param.imgAlt
+      })
+
+      console.log('restaurant added successfully!');
+      return res.ok(restaurant);
+    }
+    catch(error){
+      return res.serverError(error);
+    }
+  },
+
+  /**
+   * `RestaurantController.find()`
+   */
+  find: async function (req, res) {
+    try{
+      const restaurants = await Restaurant.find();
+      
+      return res.ok(restaurants);
+
+    }
+    catch(error)
+    {
+      return res.serverError(error);
+    }
+  },
+
+  /**
+   * `RestaurantController.findOne()`
+   */
+  findOne: async function (req, res) {
+    try{
+      const restaurant = await Restaurant.findOne({
+        id:req.params.id
+      });
+      return res.ok(restaurant);
+    }
+    catch(error){
+      return res.serverError(error);
+    }
+  },
+
+  /**
+   * `RestaurantController.update()`
+   */
+  update: async function (req, res) {
+    try{
+      let param = req.allParams();
+
+      console.log('update params: ', param);
+
+      let attribute = {};
+      if(param.restaurantName)
+          attribute.restaurantName = param.restaurantName;
+      if(param.address)
+          attribute.address = param.address;
+      if(param.phone)
+          attribute.phone = param.phone;
+      if(param.openingTime)
+          attribute.openingTime = param.openingTime;
+      if(param.closingTime)
+          attribute.closingTime = param.closingTime;
+      if(param.imgUrl)
+          attribute.imgUrl = param.imgUrl;
+      if(param.isActive)
+      {
+        attribute.isActive = param.isActive;
+      }
+      else{
+        attribute.isActive = param.isActive;
+      }
+
+          // console.log('attribute ', attribute)
+      const result = await Restaurant.update({id:param.id}, attribute);
+      // console.log('after update: ', result.isActive);
+      return res.ok(result);
+    }
+    catch(error){
+      res.serverError(err);
+    }
+  },
+
+  /**
+   * `RestaurantController.delete()`
+   */
+  delete: async function (req, res) {
+    try
+    {
+      const result = await Restaurant.destroy({
+        id:req.params.id
+      });
+      res.ok(result);
+    }
+    catch(err)
+    {
+      res.serverError(err);
+    }
+  }
+};
+

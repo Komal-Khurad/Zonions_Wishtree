@@ -1,0 +1,31 @@
+*{
+    background-color: black; 
+    color: white;
+    margin: 0px;
+    padding: 0px;
+}
+.card {
+    width: auto;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+}
+.home-main-div
+{
+    margin: 2% 5%;
+}
+.home-header{
+    text-align: center;
+    font-weight: bolder;
+    background-color: white;
+    color: black;
+    padding-bottom: 10px;
+}
+.home-brand{
+    padding: 10px;
+    float: left;
+}
+.home-link{
+    padding: 10px;
+    float:right;
+}
