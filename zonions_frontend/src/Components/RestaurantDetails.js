@@ -66,26 +66,18 @@ class RestaurantDetails extends Component {
                                 </tr>
                             </tbody>
                         </table>
+                        <button className='btn btn-primary back-to-home'
+                            onClick={this.backToHomePage}>
+                            Back To Restaurant List
+                        </button>
                     </div>
                     <div className='col-md-6 manage-img'>
                        <img className='restaurant-img'
                        src={individualRestaurant.imgUrl} alt={individualRestaurant.imgAlt} />
                     </div>
                 </div>
-                <div className='row'>
-                    <div className='col-md-4'></div>
-                    <div className='col-md-4'>
-                        <button className='btn btn-primary back-to-home'
-                            onClick={this.backToHomePage}>
-                            Back To Restaurant List
-                        </button>
-                    </div>
-                    <div className='col-md-4'></div>
-                </div>
             </div>
         )
     }
 }
 export default RestaurantDetails
-
-// export default withRestaurantsData(RestaurantDetails)

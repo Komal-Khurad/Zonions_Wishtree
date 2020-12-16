@@ -25,6 +25,7 @@ class AddRestaurant extends Component {
             imageUrlError: '',
 
             restaurantId: '',
+            loading: false,
         }
     }
 
@@ -106,6 +107,10 @@ class AddRestaurant extends Component {
 
     uploadImageToCloud = async (e) => {
         console.log("after image upload", this.state.menuImg);
+
+        this.setState({
+            loading: true
+        })
 
         const formData = new FormData();
         formData.append('file', this.state.menuImg);
@@ -231,49 +236,56 @@ class AddRestaurant extends Component {
             <div className="add-restaurant">
                 <div className="row">
                     <form className='form' onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                            <label>Restaurant Name</label>
+                        <div className="form-group required">
+                            <label className='control-label'>Restaurant Name </label>
                             <input type="text" className='form-control' name='restaurantName' value={this.state.restaurantName} onChange={this.changeHandler} />
                             <pre style={{color:'red'}}>{this.state.restaurantNameError}</pre>
                         </div>
-                        <div className="form-group">
-                            <label>Restaurant Tagline</label>
+                        <div className="form-group required">
+                            <label className='control-label'>Restaurant Tagline </label>
                             <input type="text" className='form-control' name='tagline' value={this.state.tagline} onChange={this.changeHandler} />
                         </div>
-                        <div className="form-group">
-                            <label> Address </label>
+                        <div className="form-group required">
+                            <label className='control-label'>Address </label>
                             <textarea className='form-control' name='address' value={this.state.address} onChange={this.changeHandler}></textarea>
                             <pre style={{color:'red'}}>{this.state.addressError}</pre>
                         </div>
-                        <div className="form-group">
-                            <label> Phone </label>
+                        <div className="form-group required">
+                            <label className='control-label'>Phone </label>
                             <input type="text" className='form-control' name='phone' value={this.state.phone} onChange={this.changeHandler} />
                             <pre style={{color:'red'}}>{this.state.phoneError}</pre>
                         </div>
-                        <div className="md-form md-outline">
-                            <label htmlFor="default-picker">Opening Time</label>
+                        <div className="md-form md-outline form-group required">
+                            <label className='control-label' htmlFor="default-picker">Opening Time </label>
                             <input type="time" id="default-picker" className="form-control" name='openingTime' value={this.state.openingTime} placeholder="Select time" onChange={this.changeHandler} />
                         </div>
-                        <div className="md-form md-outline">
-                            <label htmlFor="default-picker">Closing Time</label>
+                        <div className="md-form md-outline form-group required">
+                            <label className='control-label' htmlFor="default-picker">Closing Time </label>
                             <input type="time" id="default-picker" className="form-control" name='closingTime' value={this.state.closingTime} placeholder="Select time" onChange={this.changeHandler}/>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group required">
                             <input className='form-control-file' type="file" onChange={this.onFileChange} />
                             {
                                 this.state.restaurantId !=='' ? <img style={{width: '200px',height:'100px'}} src={this.state.imageUrl} alt={this.state.imageAlt}/>
                                 :null
                             }
                             <div>
-                                <button className="btn btn-primary" type='button' style={{display:'inline'}}onClick={this.uploadImageToCloud}>Upload
+                                <button className="btn btn-primary" type='button' style={{display:'inline'}}onClick={this.uploadImageToCloud} disabled={this.state.loading}>Upload
                                 </button>
+                                {
+                                    ( this.state.loading && this.state.imageUrl === '' )?
+                                        <Spinner animation="border" role="status" style={{marginLeft: '10px'}} />
+                                        :<Spinner role="status" />
+                                }
                             </div>
                             <pre style={{color:'red'}}>{this.state.imageUrlError}</pre>
+                            
                         </div>
                         <div className="form-group add-restaurant-btn">
                             <button className="btn btn-primary" type='submit'>Submit</button>
                         </div>
+                        
                     </form>
                 </div>
             </div>

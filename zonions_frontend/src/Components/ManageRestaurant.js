@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
+import { FaCheck, FaTimes} from 'react-icons/fa';
 import axios from 'axios';
 
 class ManageRestaurant extends Component {
@@ -76,14 +77,15 @@ class ManageRestaurant extends Component {
         alert('Signed out successfully')
         this.props.history.push('/');
     }
+
     render() {
         return (
             <div className='container'>
                 <h1 style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder', marginTop: '20px', marginBottom: '20px' }}>Welcome Admin</h1>
 
-                <div class="table-responsive">
+                <div className="table-responsive">
 
-                    <table className='table' style={{ textAlign: 'center', color: 'white' }}>
+                    <table className='table table-bordered' style={{ textAlign: 'center', color: 'white' }}>
                         <thead>
                             <tr>
                                 <th>Restaurant Name</th>
@@ -99,18 +101,28 @@ class ManageRestaurant extends Component {
                                 this.state.restaurants.map(restaurant => {
                                     return (
                                         <tr key={restaurant.id}>
-                                            <td>{restaurant.restaurantName}</td>
+                                            <td>{restaurant.restaurantName}
+                                                <span style={{marginLeft:'5px'}}>
+                                                    {
+                                                        restaurant.isActive ? 
+                                                        <FaCheck style={{color:'green', fontWeight:'bolder'}}/>:
+                                                        <FaTimes style={{color:'red', fontWeight:'bolder'}}/>
+                                                    }
+                                                </span>
+                                            </td>
                                             <td>{restaurant.openingTime}</td>
                                             <td>{restaurant.closingTime}</td>
                                             <td>{restaurant.updatedAt}</td>
-                                            <td>
+                                            <td style={{textAlign:'left'}}>
                                                 <button className='btn btn-success' onClick={() => this.updateData(restaurant)}>Edit</button>&nbsp;&nbsp;
 
                                             <button className='btn btn-danger' onClick={() => this.deleteData(restaurant.id)}>Delete</button>&nbsp;&nbsp;
 
-                                            <button className='btn btn-secondary' onClick={() => this.deactivate(restaurant.id)}>{
+                                            <button className='btn btn-secondary' onClick={() => this.deactivate(restaurant.id)}>
+                                                {
                                                     restaurant.isActive ? "Deactivate" : "Active"
-                                                }</button>
+                                                }
+                                            </button>
                                             </td>
                                         </tr>
                                     )

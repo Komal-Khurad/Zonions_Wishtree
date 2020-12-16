@@ -59,7 +59,6 @@ class AdminLogin extends Component {
             Cookies.set('token', authToken);
             console.log('login admin token', Cookies.get('token'))
 
-            alert('Admin logged in successfully!');
             this.props.history.push('/restaurant/manage');
         }
     }
