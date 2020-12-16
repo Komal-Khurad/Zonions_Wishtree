@@ -71,30 +71,6 @@ class AdminLogin extends Component {
     }
     render() {
         return (
-            // <div className='admin-main-div'>
-            //     <div>
-            //         <h2 className='admin-title'>Admin Login</h2>
-            //     </div>
-            //     <Form onSubmit={this.handleSubmit}>
-            //         <Form.Group >
-            //             <Form.Label>Email </Form.Label>
-            //             <Form.Control type="email" name='email' value={this.state.email} onChange={this.changeHandler} placeholder="Enter email" />
-            //             <Form.Text className="text-muted">
-            //                 We'll never share your email with anyone else.
-            //             </Form.Text>
-            //             <pre style={{ color: 'red' }}>{this.state.emailError}</pre>
-            //         </Form.Group>
-
-            //         <Form.Group >
-            //             <Form.Label>Password</Form.Label>
-            //             <Form.Control type="password" name='password' value={this.state.password} onChange={this.changeHandler} placeholder="Password" />
-            //             <pre style={{ color: 'red' }}>{this.state.passwordError}</pre>
-            //         </Form.Group>
-            //         <Button className='admin-submit-button' variant="primary" type="submit" >
-            //             Submit
-            //         </Button>
-            //     </Form>
-            // </div>
             <div className="login">
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit}>

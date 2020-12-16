@@ -40,43 +40,44 @@ class RestaurantDetails extends Component {
     }
 
     render() {
-        // const { restaurants } = this.props;
         const { individualRestaurant } = this.state;
         return (
-            <div className='restaurant-details-div'>
+            <div>
                 
                 <div className='row'>
                     <div className='col-md-12' >
-                        <h1 style={{textAlign:'center', fontWeight:'bolder', marginTop:'30px', marginBottom:'15px'}}>{individualRestaurant.restaurantName}</h1>
+                        <h1 className='restaurant-details-div'>{individualRestaurant.restaurantName}</h1>
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-6'>
-                        <table className='table table-hover'>
+                    <div className='col-md-1'></div>
+                    <div className='col-md-4'>
+                        <table className='table table-borderless restaurant-details-tbody'>
                             <tbody>
                                 <tr>
-                                    <td style={{color:'white'}}>Address</td>
-                                    <td style={{color:'white'}}>{individualRestaurant.address}</td>
+                                    <td>Address:</td>
+                                    <td>{individualRestaurant.address}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{color:'white'}}>Opening Time</td>
-                                    <td style={{color:'white'}}>{individualRestaurant.openingTime}</td>
+                                    <td>Opening Time:</td>
+                                    <td>{individualRestaurant.openingTime}</td>
                                 </tr>
                                 <tr>
-                                    <td style={{color:'white'}}>Closing Time</td>
-                                    <td style={{color:'white'}}>{individualRestaurant.closingTime}</td>
+                                    <td>Closing Time:</td>
+                                    <td>{individualRestaurant.closingTime}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div className='col-md-6'>
-                       <img style={{ width:'500px', height: '400px' }} 
+                    <div className='col-md-6 manage-img'>
+                       <img className='restaurant-img'
                        src={individualRestaurant.imgUrl} alt={individualRestaurant.imgAlt} />
                     </div>
+                    <div className='col-md-2'></div>
                 </div>
 
                 <div>
-                    <button className='btn btn-primary'
+                    <button className='btn btn-primary back-to-home'
                         onClick={this.backToHomePage}>
                         Back To Restaurant List
                     </button>

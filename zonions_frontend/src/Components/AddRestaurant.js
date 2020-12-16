@@ -26,6 +26,7 @@ class AddRestaurant extends Component {
             restaurantId: '',
         }
     }
+    
     validateForm = () =>{
         const {restaurantName, address, phone, imageUrl, imageAlt} = this.state;
         var isValid = true;
@@ -223,9 +224,12 @@ class AddRestaurant extends Component {
     
     render() {
         return (
-            <div className="container">
+            <div className="add-restaurant">
                 <div className="row">
                     <form className='form' onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <h1>More Restaurant</h1>
+                        </div>
                         <div className="form-group">
                             <label>Restaurant Name</label>
                             <input type="text" className='form-control' name='restaurantName' value={this.state. restaurantName} onChange={this.changeHandler} />
@@ -262,7 +266,7 @@ class AddRestaurant extends Component {
                             </div>
                             <pre style={{color:'red'}}>{this.state.imageUrlError}</pre>
                         </div>
-                        <div className="form-group">
+                        <div className="form-group add-restaurant-btn">
                             <button className="btn btn-primary" type='submit'>Submit</button>
                         </div>
                     </form>
