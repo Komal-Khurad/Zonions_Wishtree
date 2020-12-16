@@ -10,6 +10,7 @@ class AddRestaurant extends Component {
         this.state = {
             menuImg: '',
             restaurantName: '',
+            tagline:'',
             address: '',
             phone:'',
             openingTime:'',
@@ -26,7 +27,7 @@ class AddRestaurant extends Component {
             restaurantId: '',
         }
     }
-    
+
     validateForm = () =>{
         const {restaurantName, address, phone, imageUrl, imageAlt} = this.state;
         var isValid = true;
@@ -128,6 +129,7 @@ class AddRestaurant extends Component {
         {
             this.setState({
                 restaurantId: restaurantObj.id,
+                tagline: restaurantObj.tagline,
                 restaurantName: restaurantObj.restaurantName,
                 address: restaurantObj.address,
                 phone: restaurantObj.phone,
@@ -149,6 +151,7 @@ class AddRestaurant extends Component {
         {
             let restaurant = {
                 restaurantName: this.state.restaurantName,
+                tagline: this.state.tagline,
                 address: this.state.address,
                 phone: this.state.phone,
                 openingTime: this.state.openingTime,
@@ -161,6 +164,7 @@ class AddRestaurant extends Component {
             this.setState({
                 menuImg: '',
                 restaurantName: '',
+                tagline: '',
                 address: '',
                 phone: '',
                 openingTime: '',
@@ -172,10 +176,10 @@ class AddRestaurant extends Component {
         }
         //if we get resto id from update
         else if(this.state.restaurantId !== '') {
-            // console.log('restro Id######', this.state.restaurantId);
 
             let updatedRestaurant = {
                 restaurantName: this.state.restaurantName,
+                tagline: this.state.tagline,
                 address: this.state.address,
                 phone: this.state.phone,
                 openingTime: this.state.openingTime,
@@ -203,15 +207,15 @@ class AddRestaurant extends Component {
                 imageUrl: '',
                 imageAlt: ''
             })
-
             this.props.history.push('/restaurant/manage');
+
         }
     }
 
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]: e.target.value
-        }, console.log('after handle chnge', this.state.restaurantName)) 
+        }) 
     }
 
     onFileChange = (e) => {
@@ -228,12 +232,13 @@ class AddRestaurant extends Component {
                 <div className="row">
                     <form className='form' onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <h1>More Restaurant</h1>
+                            <label>Restaurant Name</label>
+                            <input type="text" className='form-control' name='restaurantName' value={this.state.restaurantName} onChange={this.changeHandler} />
+                            <pre style={{color:'red'}}>{this.state.restaurantNameError}</pre>
                         </div>
                         <div className="form-group">
-                            <label>Restaurant Name</label>
-                            <input type="text" className='form-control' name='restaurantName' value={this.state. restaurantName} onChange={this.changeHandler} />
-                            <pre style={{color:'red'}}>{this.state.restaurantNameError}</pre>
+                            <label>Restaurant Tagline</label>
+                            <input type="text" className='form-control' name='tagline' value={this.state.tagline} onChange={this.changeHandler} />
                         </div>
                         <div className="form-group">
                             <label> Address </label>

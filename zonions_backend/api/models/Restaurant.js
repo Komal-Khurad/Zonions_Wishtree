@@ -7,6 +7,11 @@ module.exports = {
       required: true,
       columnName: 'restaurant_name'
     },
+    tagline:{
+      type: 'string',
+      columnName: 'tag_line',
+      defaultsTo: ''
+    },
     address: {
       type: 'string',
       required: true,

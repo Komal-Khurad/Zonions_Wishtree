@@ -19,8 +19,8 @@ class Home extends React.Component {
             <div className="card" key={restaurant.id} >
                 <div className="card-body">
                     <h2 className="card-title">{restaurant.restaurantName}</h2>
-                    <p className="card-text">Sample Textsghchgdtdytyurtersdszfcbv n kjmopojpoupuyutbvcxzazxcnm</p>
-                    <a className="btn btn-primary" onClick={()=> this.getRestaurantDetails(restaurant.id)}>Restaurant Details</a>
+                    <p className="card-text">{restaurant.tagline}</p>
+                    <a className="btn btn-primary" onClick={() => this.getRestaurantDetails(restaurant.id)}>Restaurant Details</a>
                 </div>
             </div>
         )
@@ -32,6 +32,8 @@ class Home extends React.Component {
             <div className='home-main-div'>
                 <div>
                     <h1 className='home-header'>Zonions App</h1>
+                </div>
+                <div>
                     <Route>
                         <NavLink className='nav-btn1 btn btn-primary' exact to='/'>Zonions</NavLink>
                         <NavLink className='nav-btn2 btn btn-primary' exact to='/login'>Admin Login</NavLink>
@@ -48,3 +50,4 @@ class Home extends React.Component {
 }
 
 export default withRestaurantsData(Home);
+

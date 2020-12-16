@@ -15,6 +15,7 @@ module.exports = {
 
       const restaurant = await Restaurant.create({
         restaurantName:param.restaurantName,
+        tagline:param.tagline,
         address: param.address,
         phone: param.phone,
         openingTime: param.openingTime,
@@ -73,19 +74,21 @@ module.exports = {
 
       let attribute = {};
       if(param.restaurantName)
-          attribute.restaurantName = param.restaurantName;
+        attribute.restaurantName = param.restaurantName;
       if(param.address)
-          attribute.address = param.address;
+        attribute.address = param.address;
       if(param.phone)
-          attribute.phone = param.phone;
+        attribute.phone = param.phone;
       if(param.openingTime)
-          attribute.openingTime = param.openingTime;
+        attribute.openingTime = param.openingTime;
       if(param.closingTime)
-          attribute.closingTime = param.closingTime;
+        attribute.closingTime = param.closingTime;
       if(param.imgUrl)
-          attribute.imgUrl = param.imgUrl;
+        attribute.imgUrl = param.imgUrl;
       if(param.imgAlt)
-          attribute.imgAlt = param.imgAlt;
+        attribute.imgAlt = param.imgAlt;
+      if(param.tagline)
+        attribute.tagline = param.tagline;
       if(param.isActive)
       {
         console.log('inside if of isActive')

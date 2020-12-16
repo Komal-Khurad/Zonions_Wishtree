@@ -42,16 +42,14 @@ class RestaurantDetails extends Component {
     render() {
         const { individualRestaurant } = this.state;
         return (
-            <div>
-                
+            <div className='restaurant-details-div'>
                 <div className='row'>
                     <div className='col-md-12' >
-                        <h1 className='restaurant-details-div'>{individualRestaurant.restaurantName}</h1>
+                        <h1>{individualRestaurant.restaurantName}</h1>
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col-md-1'></div>
-                    <div className='col-md-4'>
+                    <div className='col-md-6'>
                         <table className='table table-borderless restaurant-details-tbody'>
                             <tbody>
                                 <tr>
@@ -73,15 +71,16 @@ class RestaurantDetails extends Component {
                        <img className='restaurant-img'
                        src={individualRestaurant.imgUrl} alt={individualRestaurant.imgAlt} />
                     </div>
-                    <div className='col-md-2'></div>
                 </div>
-
-                <div>
-                    <button className='btn btn-primary back-to-home'
-                        onClick={this.backToHomePage}>
-                        Back To Restaurant List
-                    </button>
-
+                <div className='row'>
+                    <div className='col-md-4'></div>
+                    <div className='col-md-4'>
+                        <button className='btn btn-primary back-to-home'
+                            onClick={this.backToHomePage}>
+                            Back To Restaurant List
+                        </button>
+                    </div>
+                    <div className='col-md-4'></div>
                 </div>
             </div>
         )

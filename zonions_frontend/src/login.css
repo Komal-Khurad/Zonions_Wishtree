@@ -144,10 +144,10 @@ input {
   border: 1px solid rgba(0,0,0,0.3);
   border-radius: 4px;
   box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
-  -webkit-transition: box-shadow .5s ease;
+  /* -webkit-transition: box-shadow .5s ease;
   -moz-transition: box-shadow .5s ease;
   -o-transition: box-shadow .5s ease;
-  -ms-transition: box-shadow .5s ease;
+  -ms-transition: box-shadow .5s ease; */
   transition: box-shadow .5s ease;
 }
 input:focus { 
@@ -159,14 +159,23 @@ input:focus {
     color:white;
     margin-top: 30px;
     margin-bottom:30px;
+}
+.restaurant-details-div h1{
+    margin-top: 2%;
     font-weight: bolder;
     text-align: center;
 }
+.restaurant-details-div td{
+    font-size: 1.5rem;
+}
+
 .restaurant-details-tbody{
     margin-top: 15%;
     color: white;
 }
 .restaurant-img{
+    border: 2px solid black;
+    border-radius: 10px;
     width: 500px;
     height: 400px;
 }
@@ -174,10 +183,14 @@ input:focus {
     margin-top: 3%;
 }
 .back-to-home{
-    margin-left: 15%;
+    font-size: 0.9rem;
+    padding: 5px;
 }
 
 /*Home Styles*/
+.home-main-div{
+    margin-top: 15px;
+}
 .home-header{
     color: white;
     text-align: center;
@@ -186,21 +199,25 @@ input:focus {
 }
 .card{
     text-align: center;
-    opacity: 60%;
+    opacity: 70%;
     width: 300px;
     height: 300px;
     display: inline-flex;
     margin: 15px;
+}
+.card-body{
+    padding-top: 18%;
+    font-size: 1.4rem;
 }
 .card-title{
     font-weight: bolder;
 }
 .nav-btn1{
     float: left;
-    margin-left: 10%;
+    margin-left: 8%;
 }
 .nav-btn2{
-    float: left;
+    float: right;
     color: black;
     margin-left: 60%;
 }
@@ -209,11 +226,14 @@ input:focus {
 .add-restaurant{
     color: white;
     position: absolute;
-    top: 30%;
-    left: 50%;
+    top: 25%;
+    left: 47%;
     margin: -150px 0 0 -150px;
     width:300px;
     height:300px;
+}
+.add-restaurant input {
+    width: 400px;
 }
 .add-restaurant h1 { 
     color: #fff; 
@@ -224,6 +244,6 @@ input:focus {
     font-weight: bolder;
 }
 .add-restaurant-btn{
-    margin-top: -13%;
+    margin-top: -11%;
     float: right;
 }
