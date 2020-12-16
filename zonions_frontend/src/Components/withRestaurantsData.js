@@ -25,12 +25,8 @@ const withRestaurantsData = (WrappedComponent) =>{
         }
         
         componentDidMount() {
-             this.fetchData();
+            this.fetchData();
         }
-    //     componentDidUpdate() {
-    //         this.fetchData();
-    //    }
-
         render() {
            return <WrappedComponent 
                     restaurants = {this.state.restaurants} 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Spinner } from 'react-bootstrap';
-
 import axios from 'axios';
 
 class AddRestaurant extends Component {
@@ -23,6 +22,8 @@ class AddRestaurant extends Component {
             addressError: '',
             phoneError:'',
             imageUrlError: '',
+
+            restaurantId: '',
         }
     }
     validateForm = () =>{
@@ -120,12 +121,31 @@ class AddRestaurant extends Component {
         console.log("alt :" + this.state.imageAlt);
     }
 
+    componentDidMount(){
+        const restaurantObj = this.props.location.restaurantObj;
+        if(restaurantObj)
+        {
+            this.setState({
+                restaurantId: restaurantObj.id,
+                restaurantName: restaurantObj.restaurantName,
+                address: restaurantObj.address,
+                phone: restaurantObj.phone,
+                openingTime: restaurantObj.openingTime,
+                closingTime: restaurantObj.closingTime,
+                imageUrl: restaurantObj.imgUrl,
+                imageAlt:restaurantObj.imgAlt
+            }, ()=>console.log('set the old data to add restro states',this.state))
+        }      
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault();
 
         const isValidForm = this.validateForm();
 
-        if(isValidForm){
+        // if no resto id means new entry
+        if(isValidForm && this.state.restaurantId==='')
+        {
             let restaurant = {
                 restaurantName: this.state.restaurantName,
                 address: this.state.address,
@@ -137,25 +157,60 @@ class AddRestaurant extends Component {
             }
             let restaurantData = await axios.post('http://localhost:1337/restaurant/create', restaurant);
             console.log("restaurant response: ", restaurantData);
+            this.setState({
+                menuImg: '',
+                restaurantName: '',
+                address: '',
+                phone: '',
+                openingTime: '',
+                closingTime: '',
+                imageUrl: '',
+                imageAlt: ''
+            })
+            this.props.history.push('/restaurant/manage');
         }
+        //if we get resto id from update
+        else if(this.state.restaurantId !== '') {
+            // console.log('restro Id######', this.state.restaurantId);
 
-        this.setState({
-            menuImg: '',
-            restaurantName: '',
-            address: '',
-            phone: '',
-            openingTime: '',
-            closingTime: '',
-            imgUrl: '',
-            imgAlt: ''
-        })
+            let updatedRestaurant = {
+                restaurantName: this.state.restaurantName,
+                address: this.state.address,
+                phone: this.state.phone,
+                openingTime: this.state.openingTime,
+                closingTime: this.state.closingTime,
+                imgUrl: this.state.imageUrl,
+                imgAlt: this.state.imageAlt
+            }
+            console.log('Data set for sending to update req', updatedRestaurant);
+            axios.put(`http://localhost:1337/restaurant/update/${this.state.restaurantId}`, updatedRestaurant)
+                .then((res)=>{
+                    console.log('after successfully update', res.data);
+                    alert('restaurant updated successfylly!');
+                })
+                .catch((err)=>{
+                    console.log('error while updating restaurant', err);
+                })
 
-        this.props.history.push('/restaurant/manage');
+            this.setState({
+                menuImg: '',
+                restaurantName: '',
+                address: '',
+                phone: '',
+                openingTime: '',
+                closingTime: '',
+                imageUrl: '',
+                imageAlt: ''
+            })
+
+            this.props.history.push('/restaurant/manage');
+        }
     }
+
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]: e.target.value
-        }) 
+        }, console.log('after handle chnge', this.state.restaurantName)) 
     }
 
     onFileChange = (e) => {
@@ -197,10 +252,15 @@ class AddRestaurant extends Component {
 
                         <div className="form-group">
                             <input className='form-control-file' type="file" onChange={this.onFileChange} />
-                            <button className="btn btn-primary" type='button' style={{display:'inline'}}onClick={this.uploadImageToCloud}>Upload
-                            </button>
+                            {
+                                this.state.restaurantId !=='' ? <img style={{width: '200px',height:'100px'}} src={this.state.imageUrl} alt={this.state.imageAlt}/>
+                                :null
+                            }
+                            <div>
+                                <button className="btn btn-primary" type='button' style={{display:'inline'}}onClick={this.uploadImageToCloud}>Upload
+                                </button>
+                            </div>
                             <pre style={{color:'red'}}>{this.state.imageUrlError}</pre>
-
                         </div>
                         <div className="form-group">
                             <button className="btn btn-primary" type='submit'>Submit</button>

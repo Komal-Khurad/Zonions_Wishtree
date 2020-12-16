@@ -12,9 +12,13 @@ class RestaurantDetails extends Component {
     }
 
     fectchIndividualRestaurant = () => {
-        // console.log('details comp id', this.props.location.id)
-        const restaurantId = this.props.location.id
-        axios.get(`http://localhost:1337/restaurant/find/${restaurantId}`)
+       
+        // const restaurantId = this.props.location.id
+        
+        let finalId = localStorage.getItem('restaurantId');
+        console.log('final Id', finalId);
+
+        axios.get(`http://localhost:1337/restaurant/find/${finalId}`)
             .then(res => {
                 console.log(res.data);
 
@@ -31,24 +35,19 @@ class RestaurantDetails extends Component {
         this.fectchIndividualRestaurant();
     }
 
-    // componentDidUpdate() {
-    //     this.fectchIndividualRestaurant();
-    // }
-
     backToHomePage = () => {
         this.props.history.goBack()
     }
 
     render() {
-        const { restaurants } = this.props;
+        // const { restaurants } = this.props;
         const { individualRestaurant } = this.state;
         return (
-            <div >
-                {/* <h1 >{individualRestaurant.restaurantName}</h1> */}
-
-                <div className='row' >
+            <div className='restaurant-details-div'>
+                
+                <div className='row'>
                     <div className='col-md-12' >
-                        <h1>{individualRestaurant.restaurantName}</h1>
+                        <h1 style={{textAlign:'center', fontWeight:'bolder', marginTop:'30px', marginBottom:'15px'}}>{individualRestaurant.restaurantName}</h1>
                     </div>
                 </div>
                 <div className='row'>
@@ -56,27 +55,31 @@ class RestaurantDetails extends Component {
                         <table className='table table-hover'>
                             <tbody>
                                 <tr>
-                                    <td>Address</td>
-                                    <td>{individualRestaurant.address}</td>
+                                    <td style={{color:'white'}}>Address</td>
+                                    <td style={{color:'white'}}>{individualRestaurant.address}</td>
                                 </tr>
                                 <tr>
-                                    <td>Opening Time</td>
-                                    <td>{individualRestaurant.openingTime}</td>
+                                    <td style={{color:'white'}}>Opening Time</td>
+                                    <td style={{color:'white'}}>{individualRestaurant.openingTime}</td>
                                 </tr>
                                 <tr>
-                                    <td>Closing Time</td>
-                                    <td>{individualRestaurant.closingTime}</td>
+                                    <td style={{color:'white'}}>Closing Time</td>
+                                    <td style={{color:'white'}}>{individualRestaurant.closingTime}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div className='col-md-6'>
-                       <img style={{ width:'400px', height: 'auto' }} src={individualRestaurant.imgUrl} alt={individualRestaurant.imgAlt} />
+                       <img style={{ width:'500px', height: '400px' }} 
+                       src={individualRestaurant.imgUrl} alt={individualRestaurant.imgAlt} />
                     </div>
                 </div>
 
                 <div>
-                    <button className='btn btn-primary' onClick={this.backToHomePage}>Back To Restaurant List</button>
+                    <button className='btn btn-primary'
+                        onClick={this.backToHomePage}>
+                        Back To Restaurant List
+                    </button>
 
                 </div>
             </div>

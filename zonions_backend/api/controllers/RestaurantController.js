@@ -84,21 +84,27 @@ module.exports = {
           attribute.closingTime = param.closingTime;
       if(param.imgUrl)
           attribute.imgUrl = param.imgUrl;
+      if(param.imgAlt)
+          attribute.imgAlt = param.imgAlt;
       if(param.isActive)
       {
+        console.log('inside if of isActive')
         attribute.isActive = param.isActive;
       }
       else{
+        console.log('inside else of isActive')
         attribute.isActive = param.isActive;
       }
 
-          // console.log('attribute ', attribute)
+      console.log('attribute from Front end', attribute)
+      
       const result = await Restaurant.update({id:param.id}, attribute);
-      // console.log('after update: ', result.isActive);
+      console.log('after update: ', result);
       return res.ok(result);
     }
     catch(error){
       res.serverError(err);
+      console.log('error server side', error)
     }
   },
 

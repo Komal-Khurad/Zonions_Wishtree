@@ -10,6 +10,7 @@ class Home extends React.Component {
     }
 
     getRestaurantDetails = (id) => {
+        localStorage.setItem('restaurantId', id);
         this.props.history.push({pathname:`/restaurant/details/${id}`, id: `${id}`});
     }
 
@@ -18,8 +19,8 @@ class Home extends React.Component {
             <div className="card" key={restaurant.id} >
                 <div className="card-body">
                     <h2 className="card-title">{restaurant.restaurantName}</h2>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a className="btn btn-primary" onClick={()=> this.getRestaurantDetails(restaurant.id)}>Go somewhere</a>
+                    <p className="card-text">Sample Texts</p>
+                    <a className="btn btn-primary" onClick={()=> this.getRestaurantDetails(restaurant.id)}>Restaurant Details</a>
                 </div>
             </div>
         )
@@ -29,12 +30,12 @@ class Home extends React.Component {
         const { restaurants } = this.props;
         return (
             <div className='home-main-div'>
-                <Route>
-                    <NavLink className='btn btn-primary home-brand' exact to='/'>Zonions</NavLink>
-                    <NavLink className='btn btn-primary home-link' exact to='/login'>Admin Login</NavLink>
-                </Route>
                 <div>
                     <h1 className='home-header'>Zonions App</h1>
+                    <Route>
+                        <NavLink className='nav-btn1 btn btn-primary home-brand' exact to='/'>Zonions</NavLink>
+                        <NavLink className='nav-btn2 btn btn-primary home-link' exact to='/login'>Admin Login</NavLink>
+                    </Route>
                 </div>
                 {
                     restaurants.map(restaurant => {
