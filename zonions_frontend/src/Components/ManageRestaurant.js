@@ -24,9 +24,16 @@ class ManageRestaurant extends Component {
         axios.delete(`http://localhost:1337/restaurant/delete/${id}`)
             .then((res) => {
                 alert('Restaurant deleted successfully');
-                this.setState({
-                    allRestaurants: res.data
-                })
+
+                axios.get('http://localhost:1337/restaurant/find')
+                    .then((res)=>{
+                        this.setState({
+                            allRestaurants: res.data
+                        })
+                    })
+                    .catch((err)=>{
+                        console.log('error: ', err);
+                    });
             })
             .catch((err) => console.log('error while deleting restaurant', err));
     }
@@ -37,8 +44,7 @@ class ManageRestaurant extends Component {
     deactivate(id) {
         axios.get(`http://localhost:1337/restaurant/find/${id}`)
             .then(res => {
-                console.log('before updating status ', res.data.isActive);
-
+                
                 let activeStatus= !(res.data.isActive);
                
                 axios.put(`http://localhost:1337/restaurant/update/${id}`, {isActive: activeStatus})
@@ -61,6 +67,7 @@ class ManageRestaurant extends Component {
 
     render() {
         const { restaurants } = this.props;
+        console.log('all restros ', this.state.allRestaurants)
         return (
             <div className='container'>
                 <h1 style={{color:'white', textAlign:'center', fontWeight:'bolder', marginTop:'20px', marginBottom:'20px'}}>Welcome Admin</h1>
@@ -77,23 +84,6 @@ class ManageRestaurant extends Component {
 
                     <tbody>
                         {
-                            // restaurants.map(restaurant => {
-                            //     return (
-                            //         <tr key={restaurant.id}>
-                            //             <td>{restaurant.restaurantName}</td>
-                            //             <td>{restaurant.openingTime}</td>
-                            //             <td>{restaurant.closingTime}</td>
-                            //             <td>{restaurant.updatedAt}</td>
-                            //             <td>
-                            //                 <button className='btn btn-success' onClick={() => this.updateData(restaurant)}>Edit</button>&nbsp;&nbsp;
-
-                            //                 <button className='btn btn-danger' onClick={() => this.deleteData(restaurant.id)}>Delete</button>&nbsp;&nbsp;
-
-                            //                 <button className='btn btn-secondary' onClick={() => this.deactivate(restaurant.id)}>Deactivate</button>
-                            //             </td>
-                            //         </tr>
-                            //     )
-                            // })
                            this.state.deleteFlag ?this.state.allRestaurants.map(restaurant => {
                                 return (
                                     <tr key={restaurant.id}>
