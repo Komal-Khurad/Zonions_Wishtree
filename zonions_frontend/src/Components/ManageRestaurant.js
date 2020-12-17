@@ -18,7 +18,7 @@ class ManageRestaurant extends Component {
     }
 
     deleteData(id) {
-        alert('are you sure?');
+        alert('Are you sure to delete this restaurant?');
 
         axios.delete(`http://localhost:1337/restaurant/delete/${id}`)
             .then((res) => {

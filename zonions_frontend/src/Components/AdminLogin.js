@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import '../../src/login.css'
 
@@ -51,14 +50,13 @@ class AdminLogin extends Component {
         e.preventDefault();
 
         const isValidForm = this.validateInput();
+
         if (isValidForm) {
 
             const random = Math.random();
             const authToken = '$secret' + random;
 
             Cookies.set('token', authToken);
-            console.log('login admin token', Cookies.get('token'))
-
             this.props.history.push('/restaurant/manage');
         }
     }

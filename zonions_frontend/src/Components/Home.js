@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 
-import { Button, Card, Carousel, Container, Jumbotron, Spinner } from 'react-bootstrap';
 import withRestaurantsData from './withRestaurantsData';
 
 class Home extends React.Component {
@@ -9,9 +8,9 @@ class Home extends React.Component {
         super(props)
     }
 
-    getRestaurantDetails = (id) => {
-        localStorage.setItem('restaurantId', id);
-        this.props.history.push({pathname:`/restaurant/details/${id}`, id: `${id}`});
+    getRestaurantDetails = (restaurant) => {
+        localStorage.setItem('restaurantId', restaurant.id);
+        this.props.history.push({pathname:`/restaurant/details/${restaurant.id}`, data: restaurant});
     }
 
     displayActiveRestaurant = (restaurant) =>{
@@ -20,12 +19,13 @@ class Home extends React.Component {
                 <div className="card-body">
                     <h2 className="card-title">{restaurant.restaurantName}</h2>
                     <p className="card-text">{restaurant.tagline}</p>
-                    <a className="btn btn-primary" onClick={() => this.getRestaurantDetails(restaurant.id)}>Restaurant Details</a>
+                    <a className="btn btn-primary" onClick={() => this.getRestaurantDetails(restaurant)}>
+                        Restaurant Details
+                    </a>
                 </div>
             </div>
         )
     }
-
     render() {
         const { restaurants } = this.props;
         return (
@@ -36,7 +36,7 @@ class Home extends React.Component {
                 <div>
                     <Route>
                         <NavLink className='nav-btn1 btn btn-primary' exact to='/'>Zonions</NavLink>
-                        <NavLink className='nav-btn2 btn btn-primary' exact to='/login'>Admin Login</NavLink>
+                        <NavLink className='nav-btn2 btn btn-primary' exact to='/login'>Login</NavLink>
                     </Route>
                 </div>
                 {

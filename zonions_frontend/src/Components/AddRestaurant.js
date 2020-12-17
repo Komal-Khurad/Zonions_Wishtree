@@ -124,8 +124,6 @@ class AddRestaurant extends Component {
             imageUrl: imageData.data.secure_url,
             imageAlt: `An image of ${imageData.data.original_filename}`
         })
-        console.log("url :" + this.state.imageUrl);
-        console.log("alt :" + this.state.imageAlt);
     }
 
     componentDidMount(){
@@ -142,7 +140,7 @@ class AddRestaurant extends Component {
                 closingTime: restaurantObj.closingTime,
                 imageUrl: restaurantObj.imgUrl,
                 imageAlt:restaurantObj.imgAlt
-            }, ()=>console.log('set the old data to add restro states',this.state))
+            })
         }      
     }
 
@@ -151,7 +149,7 @@ class AddRestaurant extends Component {
 
         const isValidForm = this.validateForm();
 
-        // if no resto id means new entry
+        // if rastaurant id is undefined that means new entry
         if(isValidForm && this.state.restaurantId==='')
         {
             let restaurant = {
@@ -166,6 +164,7 @@ class AddRestaurant extends Component {
             }
             let restaurantData = await axios.post('http://localhost:1337/restaurant/create', restaurant);
             console.log("restaurant response: ", restaurantData);
+
             this.setState({
                 menuImg: '',
                 restaurantName: '',
@@ -179,7 +178,8 @@ class AddRestaurant extends Component {
             })
             this.props.history.push('/restaurant/manage');
         }
-        //if we get resto id from update
+
+        //if we get restaurant id from update button click
         else if(this.state.restaurantId !== '') {
 
             let updatedRestaurant = {
@@ -192,7 +192,7 @@ class AddRestaurant extends Component {
                 imgUrl: this.state.imageUrl,
                 imgAlt: this.state.imageAlt
             }
-            console.log('Data set for sending to update req', updatedRestaurant);
+            
             axios.put(`http://localhost:1337/restaurant/update/${this.state.restaurantId}`, updatedRestaurant)
                 .then((res)=>{
                     console.log('after successfully update', res.data);
@@ -217,6 +217,7 @@ class AddRestaurant extends Component {
         }
     }
 
+    //handles change in the current targets and set the changes to the states
     changeHandler = (e) =>{
         this.setState({
             [e.target.name]: e.target.value
@@ -227,8 +228,6 @@ class AddRestaurant extends Component {
         this.setState({
             menuImg: e.target.files[0]
         })
-
-        console.log(this.state)
     }
     
     render() {
@@ -282,6 +281,7 @@ class AddRestaurant extends Component {
                             <pre style={{color:'red'}}>{this.state.imageUrlError}</pre>
                             
                         </div>
+
                         <div className="form-group add-restaurant-btn">
                             <button className="btn btn-primary" type='submit'>Submit</button>
                         </div>

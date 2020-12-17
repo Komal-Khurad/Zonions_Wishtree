@@ -10,10 +10,11 @@
 
 module.exports.routes = {
 
-'POST /restaurant/create': 'RestaurantController.create',
-'GET /restaurant/find': 'RestaurantController.find',
-'GET /restaurant/find/:id': 'RestaurantController.findOne',
-'PUT /restaurant/update/:id': 'RestaurantController.update',
-'DELETE /restaurant/delete/:id': 'RestaurantController.delete',
+    //Routes For Restaurant CRUD
+    'POST /restaurant/create': 'RestaurantController.create',
+    'GET /restaurant/find': 'RestaurantController.find',
+    'GET /restaurant/find/:id': 'RestaurantController.findOne',
+    'PUT /restaurant/update/:id': 'RestaurantController.update',
+    'DELETE /restaurant/delete/:id': 'RestaurantController.delete',
 
 };

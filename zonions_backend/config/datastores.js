@@ -50,6 +50,8 @@ module.exports.datastores = {
     ***************************************************************************/
     // adapter: 'sails-mysql',
     // url: 'mysql://user:password@host:port/database',
+
+    //To connect with MongoDB:
     adapter: 'sails-mongo',
     port: 27017,
     host: 'localhost',

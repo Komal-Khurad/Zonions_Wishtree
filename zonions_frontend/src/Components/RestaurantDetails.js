@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import withRestaurantsData from './withRestaurantsData';
 
 class RestaurantDetails extends Component {
     constructor(props) {
@@ -13,8 +12,6 @@ class RestaurantDetails extends Component {
 
     fectchIndividualRestaurant = () => {
        
-        // const restaurantId = this.props.location.id
-        
         let finalId = localStorage.getItem('restaurantId');
         console.log('final Id', finalId);
 
@@ -34,7 +31,7 @@ class RestaurantDetails extends Component {
     componentDidMount() {
         this.fectchIndividualRestaurant();
     }
-
+   
     backToHomePage = () => {
         this.props.history.goBack()
     }
